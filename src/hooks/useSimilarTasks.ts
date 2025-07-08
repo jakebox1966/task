@@ -19,7 +19,7 @@ export const useSimilarTasks = () => {
   const tasks = useTaskStore(state => state.tasks)
 
   // 제외할 문제 ID들
-  const excludedIds = tasks?.map(task => task.id) || []
+  const excludedIds = tasks?.filter(task => !task.isActive).map(task => task.id) || []
   const excludedIdsString = excludedIds.length > 0 ? excludedIds.join(',') : ''
 
   // GET API - 실제 서버 연결

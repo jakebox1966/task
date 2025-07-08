@@ -78,10 +78,7 @@ export const useTaskStore = create<TaskState>((set, get) => ({
 
     if (selectedTaskIndex === undefined) {
       console.error('유효하지 않아요: selectedTaskIndex가 undefined입니다.')
-      // selectedTaskIndex가 없으면 교체할 수 없으므로 맨 뒤에 추가
-      const newTaskWithActive = { ...newTask, isActive: true }
-      const newTasksWithActive = tasks.map(task => ({ ...task, isActive: false }))
-      set({ tasks: [...newTasksWithActive, newTaskWithActive] })
+
       return undefined
     }
 
@@ -91,10 +88,6 @@ export const useTaskStore = create<TaskState>((set, get) => ({
         selectedTaskIndex,
         tasksLength: tasks.length,
       })
-      // selectedTaskIndex가 유효하지 않으면 맨 뒤에 추가
-      const newTaskWithActive = { ...newTask, isActive: true }
-      const newTasksWithActive = tasks.map(task => ({ ...task, isActive: false }))
-      set({ tasks: [...newTasksWithActive, newTaskWithActive] })
       return undefined
     }
 
