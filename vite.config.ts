@@ -8,4 +8,18 @@ export default defineConfig({
     port: 3000,
   },
   plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': '/src',
+      '@/components': '/src/components',
+      '@/lib': '/src/lib',
+      '@/stores': '/src/stores',
+      '@/providers': '/src/providers',
+      '@/constants': '/src/constants',
+      '@/app': '/src/app',
+      '@/common': '/src/common',
+      '@/styles': '/src/styles',
+      '@/assets': '/src/assets',
+    },
+  },
 })

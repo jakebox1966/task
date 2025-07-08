@@ -1,49 +1,152 @@
-# Task App
+# 학습지 상세 편집 시스템
 
-React + TypeScript + Vite + TailwindCSS + Zustand + React Query + React Router 프로젝트
+학습지 문제를 관리하고 유사 문항을 추천하는 React 기반 웹 애플리케이션입니다.
 
-## 기술 스택
+## 🚀 주요 기능
 
-- **Vite** - 빠른 빌드 도구
-- **React 19** - UI 라이브러리
-- **TypeScript** - 타입 안전성
-- **TailwindCSS v4** - 유틸리티 CSS 프레임워크
-- **Zustand** - 상태 관리
-- **React Query** - 서버 상태 관리
-- **React Router** - 라우팅
+- **학습지 상세 편집**: 문제 추가, 삭제, 교체 기능
+- **유사 문항 추천**: 선택된 문제와 유사한 문제들을 자동 추천
+- **난이도별 통계**: 하/중하/중/상/최상 난이도별 문제 수 표시
+- **반응형 디자인**: 1024px, 1280px 브레이크포인트 지원
+- **실시간 상태 관리**: 선택된 문제에 따른 동적 UI 업데이트
 
-## 개발 도구
+## 🛠 기술 스택
 
-- **ESLint** - 코드 품질
+### Frontend
+
+- **React 19** - 최신 React 기능 활용
+- **TypeScript** - 타입 안전성 보장
+- **Vite** - 빠른 개발 환경 및 빌드 도구
+- **TailwindCSS v4** - 유틸리티 기반 CSS 프레임워크
+
+### 상태 관리
+
+- **Zustand** - 클라이언트 상태 관리
+- **React Query (TanStack Query)** - 서버 상태 관리 및 캐싱
+
+### API & 타입 안전성
+
+- **Zodios** - 타입 안전한 API 클라이언트
+- **Zod** - 런타임 타입 검증
+- **Axios** - HTTP 클라이언트
+
+### 라우팅
+
+- **React Router v7** - SPA 라우팅
+
+### 개발 도구
+
+- **ESLint** - 코드 품질 관리
 - **Prettier** - 코드 포맷팅
-- **pnpm** - 패키지 매니저
+- **pnpm** - 빠른 패키지 매니저
 
-## 시작하기
+## 📦 설치 및 실행
+
+### 필수 요구사항
+
+- Node.js 22.14.0
+- pnpm 8.0.0 이상
+
+### 설치
 
 ```bash
+# 저장소 클론
+git clone [repository-url]
+cd task
+
 # 의존성 설치
 pnpm install
-
-# 개발 서버 실행
-pnpm dev
-
-# 빌드
-pnpm build
-
-# 린트
-pnpm lint
-
-# 포맷팅
-pnpm format
 ```
 
-## 프로젝트 구조
+### 개발 서버 실행
+
+```bash
+# 개발 서버 시작 (http://localhost:3000)
+pnpm dev
+```
+
+## 🏗 프로젝트 구조
 
 ```
 src/
-├── components/     # 재사용 가능한 컴포넌트
-├── pages/         # 페이지 컴포넌트
-├── stores/        # Zustand 스토어
-├── lib/           # 유틸리티 함수
-└── styles/        # 스타일 파일
+├── app/
+│   ├── api/                    # API 관련 설정
+│   │   ├── common.types.ts     # 공통 타입 정의
+│   │   ├── endpoints/          # API 엔드포인트 정의
+│   │   ├── index.ts           # API 클라이언트 설정
+│   │   └── zodios-api-shorthand.ts # Zodios 헬퍼
+│   └── pages/
+│       └── task/              # 학습지 관련 페이지
+│           ├── components/    # 페이지별 컴포넌트
+│           ├── containers/    # 컨테이너 컴포넌트
+│           └── types/         # 페이지별 타입 정의
+├── components/                # 재사용 가능한 컴포넌트
+│   ├── layouts/              # 레이아웃 컴포넌트
+│   └── ui-designed/          # UI 컴포넌트
+├── constants/                # 상수 정의
+├── hooks/                    # 커스텀 훅
+├── lib/                      # 유틸리티 및 설정
+├── providers/                # React Provider 컴포넌트
+├── stores/                   # Zustand 스토어
+└── styles/                   # 글로벌 스타일
 ```
+
+## 🎯 주요 컴포넌트
+
+### 학습지 상세 편집 (`TaskComponent`)
+
+- 학습지에 추가된 문제들을 카드 형태로 표시
+- 문제 선택 및 활성화 상태 관리
+- 난이도별 문제 수 통계 표시
+
+### 유사 문항 (`SimilarTaskComponent`)
+
+- 선택된 문제와 유사한 문제들을 표시
+- 유사 문제 추가/교체 기능 제공
+- 빈 상태일 때 안내 메시지 표시
+
+### 문제 카드 (`TaskCard`)
+
+- 문제 정보를 카드 형태로 표시
+- 선택 상태에 따른 파란색 테두리 표시
+- 문제 번호, 제목, 난이도, 정답률, 유형, 이미지 표시
+
+## 🔄 상태 관리
+
+### Zustand Store
+
+- **useTaskStore**: 학습지 문제 관리
+  - 문제 목록, 선택 상태, 활성화 상태
+  - 추가, 삭제, 교체, 활성화 기능
+  - 난이도별 통계 계산
+
+- **useSimilarTaskStore**: 유사 문제 관리
+  - 유사 문제 목록 관리
+  - 추가, 삭제, 교체 기능
+
+## 🎨 UI/UX 특징
+
+### 반응형 디자인
+
+- **태블릿**: 1024px 이상
+- **데스크톱**: 1280px 이상
+
+### 색상 시스템
+
+- **주요 색상**: #5C5C5C (다크 그레이)
+- **액센트 색상**: #00ABFF (파란색)
+- **에러 색상**: #FD5354 (빨간색)
+- **텍스트 색상**: #959595 (회색)
+
+### 폰트
+
+- **Spoqa Han Sans Neo**: 한글 최적화 폰트
+
+## 🐛 에러 처리
+
+### 공통 에러 처리
+
+- **Zodios 에러**: 타입 안전한 API 에러 처리
+- **네트워크 에러**: 연결 오류 감지 및 처리
+- **타임아웃 에러**: 요청 시간 초과 처리
+- **HTTP 상태 코드**: 400, 404, 500 등 처리
